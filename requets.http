@@ -1,0 +1,43 @@
+###user registration
+post http://localhost:6000/user-api/user
+Content-Type: application/json
+
+{
+    "userType":"user",
+    "username":"ravi",
+    "password":"ravi",
+    "email":"ravi@mail.com"
+}
+
+###user login req
+post http://localhost:6000/user-api/login
+Content-Type: application/json
+
+{
+    "userType":"user",
+    "username":"ravi",
+    "password":"ravi"
+    
+}
+
+###author registration
+post http://localhost:6000/author-api/user
+Content-Type: application/json
+
+{
+    "userType":"author",
+    "username":"bhanu",
+    "password":"bhanu",
+    "email":"bhanu@mail.com"
+}
+
+###author login
+post http://localhost:6000/author-api/login
+Content-Type: application/json
+
+{
+    "userType":"author",
+    "username":"bhanu",
+    "password":"bhanu"
+   
+}
