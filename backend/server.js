@@ -16,9 +16,12 @@ mongoClient.connect(process.env.DB_URL)
     //create collection objects
     const usersCollection=blogDBobj.collection('users')
     const authorsCollection=blogDBobj.collection('authors')
+    const articlesCollection=blogDBobj.collection('articles')
+
     //share collection objs with APIs
     app.set('usersCollection',usersCollection)
     app.set('authorsCollection',authorsCollection)
+    app.set('articlesCollection',articlesCollection)
     console.log("DB connection success")
 })
 .catch(err=>{

@@ -41,3 +41,64 @@ Content-Type: application/json
     "password":"bhanu"
    
 }
+
+
+### add new article
+post http://localhost:6000/author-api/new-article
+Content-Type: application/json
+
+{
+   "articleId":"{{$timestamp}}",
+   "title":"Fundamentals of JavaScript",
+   "category":"programming",
+   "content":"JavaScript's dynamic capabilities include runtime object construction, variable parameter lists, function variables, dynamic script creation object introspection (via for...in and Object utilities, and source-code recovery JavaScript functions store their source text and can be retrieved ",
+   "dateOfCreation":"{{$datetime iso8601}}",
+   "dateOfModification":"{{$datetime iso8601}}",
+   "username":"bhanu",
+   "comments": [ ],
+   "status":true
+   
+}
+
+
+### read articles by author's username
+get http://localhost:6000/author-api/articles/bhanu
+
+### edit article
+put http://localhost:6000/author-api/article
+Content-Type: application/json
+
+{
+   "articleId":"1709214892",
+   "title":"Fundamentals of JavaScript",
+   "category":"programming",
+   "content":" variable parameter lists, function variables, dynamic script creation object introspection (via for...in and Object utilities, and source-code recovery JavaScript functions store their source text and can be retrieved ",
+   "dateOfCreation":"2024-02-29T13:54:52.963Z",
+   "dateOfModification":"{{$datetime iso8601}}",
+   "username":"bhanu",
+   "comments": [ ],
+   "status":true
+   
+}
+
+
+### soft delete(update) of an article by id
+put http://localhost:6000/author-api/article/1709214892
+Content-Type: application/json
+
+{
+   "articleId":"1709214892",
+   "title":"Fundamentals of JavaScript",
+   "category":"programming",
+   "content":" variable parameter lists, function variables, dynamic script creation object introspection (via for...in and Object utilities, and source-code recovery JavaScript functions store their source text and can be retrieved ",
+   "dateOfCreation":"2024-02-29T13:54:52.963Z",
+   "dateOfModification":"2024-02-29T14:18:34.838Z",
+   "username":"bhanu",
+   "comments": [ ],
+   "status":false
+   
+}
+
+
+### read articles of all authors by a user
+get  http://localhost:6000/user-api/articles
