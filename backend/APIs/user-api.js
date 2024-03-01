@@ -27,5 +27,22 @@ userApp.get('/articles',expressAsynHandler(async(req,res)=>{
 
 }))
 
+
+//write comment for an article by its artioclesID
+userApp.post('/comment/:articleId',expressAsynHandler(async(req,res)=>{
+
+        //get articleId from url
+       const articleIdFromURL=req.params.articleId;
+        //get comment obj from req
+        const userComment=req.body;
+        //add usercomment obj as an element to comments array of article document
+        await articlesCollection.updateOne({articleId:articleIdFromURL},{$addToSet:{comments:userComment}})
+        //send res
+        res.send({message:"User comment added"})
+
+}))
+
 //export userApp
 module.exports=userApp;
+
+

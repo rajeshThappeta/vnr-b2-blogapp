@@ -102,3 +102,13 @@ Content-Type: application/json
 
 ### read articles of all authors by a user
 get  http://localhost:6000/user-api/articles
+
+
+### write comment by user
+post http://localhost:6000/user-api/comment/1709214892
+Content-Type: application/json
+
+{
+    "username":"ravi",
+    "comment":"Very useful"
+}
