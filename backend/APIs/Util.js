@@ -62,7 +62,8 @@ const userOrAuthorLogin = async(req, res) => {
     if(dbuser===null){
         return res.send({message:"Invalid username"})
     }else{
-        let status=bcryptjs.compare(userCred.password,dbuser.password)
+        let status=await bcryptjs.compare(userCred.password,dbuser.password)
+       // console.log("status",status)
         if(status===false){
             return res.send({message:"Invalid password"})
         }

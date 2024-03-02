@@ -1,12 +1,31 @@
 import "./Signin.css";
 import { useForm } from "react-hook-form";
+import { userLoginThunk } from "../../redux/slices/userLoginSlice";
+import {useDispatch,useSelector} from 'react-redux'
+import { useEffect } from "react";
+import {useNavigate} from 'react-router-dom'
 
 function Signin() {
   let { register, handleSubmit } = useForm();
+  let dispatch=useDispatch();
+  let navigate=useNavigate()
+  const {isPending,currentUser,errorStatus,errorMessage,loginStatus}=useSelector(state=>state.userLogin)
 
   function onSignUpFormSubmit(userCred) {
-    console.log(userCred);
+      let actionObj=userLoginThunk(userCred)
+      dispatch(actionObj)
   }
+
+  useEffect(()=>{
+    if(loginStatus===true){
+      if(currentUser.userType==='user'){
+      navigate('/user-profile')
+      }
+      if(currentUser.userType==='author'){
+        navigate('/author-profile')
+        }
+    }
+  },[loginStatus])
 
   return (
     <div className="container">
