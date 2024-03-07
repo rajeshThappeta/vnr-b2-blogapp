@@ -2,6 +2,7 @@ const exp=require('express')
 const authorApp=exp.Router()
 const {createUserOrAuthor,userOrAuthorLogin}=require('./Util')
 const expressAsyncHandler=require('express-async-handler')
+const verifyToken=require('../Middlewares/verifyToken')
 
 let authorsCollection;
 let articlesCollection;
@@ -17,7 +18,7 @@ authorApp.post('/user',expressAsyncHandler(createUserOrAuthor) )
 authorApp.post('/login',expressAsyncHandler(userOrAuthorLogin) )
 
 //to save new article
-authorApp.post('/new-article',expressAsyncHandler(async(req,res)=>{
+authorApp.post('/new-article',verifyToken,expressAsyncHandler(async(req,res)=>{
     //get new article from client
     const newArticle=req.body;
     //save new Article to articles collection
@@ -27,7 +28,7 @@ authorApp.post('/new-article',expressAsyncHandler(async(req,res)=>{
 }))
 
 //read artcles by author's username
-authorApp.get('/articles/:username',expressAsyncHandler(async(req,res)=>{
+authorApp.get('/articles/:username',verifyToken,expressAsyncHandler(async(req,res)=>{
     //get author's username from url
     const usernameOfAuthor=req.params.username;
     //get articles of current author
@@ -38,7 +39,7 @@ authorApp.get('/articles/:username',expressAsyncHandler(async(req,res)=>{
 
 
 //edit article
-authorApp.put('/article',expressAsyncHandler(async(req,res)=>{
+authorApp.put('/article',verifyToken,expressAsyncHandler(async(req,res)=>{
 
         //get modified article
         const modifiedArticle=req.body;
@@ -48,7 +49,7 @@ authorApp.put('/article',expressAsyncHandler(async(req,res)=>{
 }))
 
 //delete article(soft delete)
-authorApp.put('/article/:articleId',expressAsyncHandler(async(req,res)=>{
+authorApp.put('/article/:articleId',verifyToken,expressAsyncHandler(async(req,res)=>{
     let article=req.body;
     await articlesCollection.updateOne({articleId:article.articleId},{$set:{...article}})
     res.send({message:"Article deleted"})

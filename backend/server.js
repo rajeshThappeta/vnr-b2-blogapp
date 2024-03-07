@@ -43,6 +43,10 @@ app.use("/user-api", userApp);
 app.use("/author-api", authorApp);
 app.use("/admin-api", adminApp);
 
+//deals with page refresh
+app.use((req,res,next)=>{
+  res.sendFile(path.join(__dirname,'../frontend/build/index.html'))
+})
 //error handling middeware
 app.use((err, req, res, next) => {
   res.send({ status: "error", message: err.message });

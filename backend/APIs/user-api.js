@@ -3,6 +3,7 @@ const exp=require('express')
 const userApp=exp.Router()
 const {createUserOrAuthor,userOrAuthorLogin}=require('./Util')
 const expressAsynHandler=require('express-async-handler')
+const verifyToken=require('../Middlewares/verifyToken')
 let usersCollection;
 let articlesCollection;
 userApp.use((req,res,next)=>{
@@ -20,7 +21,7 @@ userApp.post('/login',expressAsynHandler(userOrAuthorLogin))
 
 
 // read articles of all authors
-userApp.get('/articles',expressAsynHandler(async(req,res)=>{
+userApp.get('/articles',verifyToken,expressAsynHandler(async(req,res)=>{
     //get all articles of all authors
     const articlesList=await articlesCollection.find({status:true}).toArray()
     res.send({message:"All articles",payload:articlesList})

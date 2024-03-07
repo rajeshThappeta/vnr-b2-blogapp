@@ -1,29 +1,34 @@
 import "./AuthorProfile.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
+import {useSelector} from 'react-redux';
+
 
 function AuthorProfile() {
+  let {currentUser}=useSelector(state=>state.userLogin)
+ 
   return (
-    <div>
-      <ul className="nav  justify-content-around fs-1">
+    <div className="author-profile p-3 ">
+      <ul className="nav  justify-content-around fs-3">
         <li className="nav-item">
           <NavLink
             className="nav-link"
-            to=""
+            to={`articles-by-author/${currentUser.username}`}
             style={{ color: "var(--dark-green)" }}
           >
-            Articles
+            Articles of Author
           </NavLink>
         </li>
         <li className="nav-item">
           <NavLink
             className="nav-link"
-            to=""
+            to="new-article"
             style={{ color: "var(--dark-green)" }}
           >
             Add new
           </NavLink>
         </li>
       </ul>
+      <Outlet />
     </div>
   );
 }

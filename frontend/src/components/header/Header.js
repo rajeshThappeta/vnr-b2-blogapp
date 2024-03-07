@@ -1,33 +1,30 @@
 import React from "react";
 import "./Header.css";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetState } from "../../redux/slices/userLoginSlice";
 
+
 function Header() {
-  const { isPending, currentUser, errorStatus, errorMessage, loginStatus } =
-    useSelector((state) => state.userLogin);
-    let dispatch=useDispatch()
+  let { isPending,currentUser,errorStatus,errorMessage,loginStatus} = useSelector(
+    (state) => state.userLogin
+  );
+  let dispatch = useDispatch();
 
-
-    function logout(){
-      //remove token from browser stotage
-      sessionStorage.removeItem('token')
-      //reset state
-      let action=resetState()
-      dispatch(action)
-    }
-
+  function signout(){
+    sessionStorage.removeItem('token')
+    dispatch(resetState())
+  }
   return (
     <nav
-      className="navbar navbar-expand-sm fs-5 shadow-sm"
-      style={{ backgroundColor: "var(--dark-maroon)" }}
+      className="navbar navbar-expand-sm fs-5"
+      style={{ backgroundColor: "var(--light-olive)" }}
     >
       <div className="container-fluid">
-        <Link className="navbar-brand">
-          <img src={logo} alt="" width="60px" className="rounded" />
-        </Link>
+        <a className="navbar-brand" href="#">
+          <img src={logo} alt="" width="60px" />
+        </a>
         <button
           className="navbar-toggler"
           type="button"
@@ -45,7 +42,7 @@ function Header() {
                   <NavLink
                     className="nav-link"
                     to=""
-                    style={{ color: "var(--light-grey)" }}
+                    style={{ color: "white" }}
                   >
                     Home
                   </NavLink>
@@ -54,7 +51,7 @@ function Header() {
                   <NavLink
                     className="nav-link"
                     to="signup"
-                    style={{ color: "var(--light-grey)" }}
+                    style={{ color: "white" }}
                   >
                     SignUp
                   </NavLink>
@@ -63,7 +60,7 @@ function Header() {
                   <NavLink
                     className="nav-link"
                     to="signin"
-                    style={{ color: "var(--light-grey)" }}
+                    style={{ color: "white" }}
                   >
                     SignIn
                   </NavLink>
@@ -71,13 +68,16 @@ function Header() {
               </>
             ) : (
               <li className="nav-item">
+               
                 <NavLink
                   className="nav-link"
                   to="signin"
                   style={{ color: "var(--light-grey)" }}
-                  onClick={logout}
+                  onClick={signout}
                 >
-                  <span className="lead fs-3 text-warning me-4">{currentUser.username}</span>
+                   <span className="lead  fs-4 me-3 fw-1"  style={{ color: "#994570" ,fontWeight:'bold',fontSize:'1.3rem',textTransform:'capitalize',fontFamily:'fantasy'}}>{currentUser.username}
+                   <sup style={{color:'var(--dark-green)',fontSize:'1rem'}}>({currentUser.userType})</sup>
+                   </span>
                   Signout
                 </NavLink>
               </li>
@@ -90,3 +90,4 @@ function Header() {
 }
 
 export default Header;
+
