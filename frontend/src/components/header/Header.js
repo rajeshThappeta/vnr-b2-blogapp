@@ -19,7 +19,7 @@ function Header() {
   return (
     <nav
       className="navbar navbar-expand-sm fs-5"
-      style={{ backgroundColor: "var(--light-olive)" }}
+      style={{ backgroundColor: "var(--medium-maroon)" }}
     >
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
@@ -75,8 +75,8 @@ function Header() {
                   style={{ color: "var(--light-grey)" }}
                   onClick={signout}
                 >
-                   <span className="lead  fs-4 me-3 fw-1"  style={{ color: "#994570" ,fontWeight:'bold',fontSize:'1.3rem',textTransform:'capitalize',fontFamily:'fantasy'}}>{currentUser.username}
-                   <sup style={{color:'var(--dark-green)',fontSize:'1rem'}}>({currentUser.userType})</sup>
+                   <span className="lead  fs-4 me-3 fw-1"  style={{ color: "var(--yellow)" ,fontWeight:'bold',fontSize:'1.3rem',textTransform:'capitalize',fontFamily:'fantasy'}}>{currentUser.username}
+                   <sup style={{color:'var(--medium-grey)',fontSize:'1rem'}}>({currentUser.userType})</sup>
                    </span>
                   Signout
                 </NavLink>

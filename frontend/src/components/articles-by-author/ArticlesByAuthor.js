@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "./ArticlesByAuthor.css";
 import { useNavigate, redirect, Outlet } from "react-router-dom";
+import { FcReading } from "react-icons/fc";
 
 function ArticlesByAuthor() {
   const [articlesList, setArticlesList] = useState([]);
@@ -18,7 +19,7 @@ function ArticlesByAuthor() {
 
   const getArticlesOfCurrentAuthor = async () => {
    let res= await axiosWithToken.get(`http://localhost:4000/author-api/articles/${currentUser.username}`)
-   console.log(res)
+   //console.log(res)
    if(res.data.message==='Articles'){
     setArticlesList(res.data.payload)
    }else{
@@ -27,7 +28,7 @@ function ArticlesByAuthor() {
   };
 
   const readArticleByArticleId = (articleObj) => {
-    navigate(`../article/${articleObj.articleId}`);
+    navigate(`../article/${articleObj.articleId}`,{state:articleObj});
   };
 
   useEffect(() => {
@@ -49,7 +50,7 @@ function ArticlesByAuthor() {
             <div className="col" key={article.articleId}>
               <div className="card h-100">
                 <div className="card-body">
-                  <h5 className="card-title">{article.title}</h5>
+                  <h5 className="card-title" style={{color:'var(--dark-maroon)'}}>{article.title}</h5>
                   <p className="card-text">
                     {article.content.substring(0, 80) + "...."}
                   </p>
@@ -57,7 +58,7 @@ function ArticlesByAuthor() {
                     className="custom-btn btn-4"
                     onClick={() => readArticleByArticleId(article)}
                   >
-                    <span>Read More</span>
+                    <span ><FcReading className="me-2 fs-3" style={{color:'var(--light-yellow)'}} />Read More...</span>
                   </button>
                 </div>
                 <div className="card-footer">

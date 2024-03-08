@@ -6,8 +6,15 @@ function RootLayout() {
   return (
     <div>
       <Header />
-      <div style={{ minHeight: "70vh" }}><Outlet /></div>
-      <Footer />
+      <div style={{ minHeight: "70vh" }}>
+        <div className="container">
+          {" "}
+          <Outlet />
+        </div>
+      </div>
+      <div style={{ marginTop: "100px" }}>
+        <Footer />
+      </div>
     </div>
   );
 }

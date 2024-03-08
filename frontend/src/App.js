@@ -10,8 +10,10 @@ import ArticlesByAuthor from './components/articles-by-author/ArticlesByAuthor';
 import Article from './components/article/Article';
 import AddArticle from './components/add-article/AddArticle';
 import Articles from './components/Articles/Articles';
+import { useSelector } from 'react-redux';
 
 function App() {
+  let { currentUser } = useSelector((state) => state.userLogin);
 
   const browserRouter=createBrowserRouter([{
     path:'',
@@ -56,7 +58,7 @@ function App() {
             element:<AddArticle />
           },
           {
-            path:'articles-by-author/:author',
+            path:'articles-by-author/:username',
             element:<ArticlesByAuthor />,
            
           },
@@ -66,7 +68,7 @@ function App() {
           },
           {
             path:'',
-            element:<Navigate to='articles-by-author/:author' />
+            element:<Navigate to={`articles-by-author/${currentUser.username}`} />
           }
         ]
       }

@@ -72,7 +72,7 @@ const userOrAuthorLogin = async(req, res) => {
         }
         else{
             //create token
-           const signedToken= jwt.sign({username:dbuser.username},process.env.SECRET_KEY,{expiresIn:'1d'})
+           const signedToken= jwt.sign({username:dbuser.username},process.env.SECRET_KEY,{expiresIn:"1h"})
            delete dbuser.password;
            res.send({message:"login success",token:signedToken,user:dbuser})
         }

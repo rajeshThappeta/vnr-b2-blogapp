@@ -43,8 +43,10 @@ authorApp.put('/article',verifyToken,expressAsyncHandler(async(req,res)=>{
 
         //get modified article
         const modifiedArticle=req.body;
-        await articlesCollection.updateOne({articleId:modifiedArticle.articleId},{$set:{...modifiedArticle}})
-        res.send({message:"Article modified"})
+        console.log(modifiedArticle)
+       let articleAfterModification= await articlesCollection.findOneAndUpdate({articleId:modifiedArticle.articleId},{$set:{...modifiedArticle}},{returnDocument:'after'})
+       console.log(articleAfterModification)
+        res.send({message:"Article modified",payload:articleAfterModification})
 
 }))
 

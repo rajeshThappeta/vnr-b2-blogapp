@@ -33,9 +33,10 @@ userApp.get('/articles',verifyToken,expressAsynHandler(async(req,res)=>{
 userApp.post('/comment/:articleId',expressAsynHandler(async(req,res)=>{
 
         //get articleId from url
-       const articleIdFromURL=req.params.articleId;
+       const articleIdFromURL=(+req.params.articleId);
         //get comment obj from req
         const userComment=req.body;
+        console.log(userComment)
         //add usercomment obj as an element to comments array of article document
         await articlesCollection.updateOne({articleId:articleIdFromURL},{$addToSet:{comments:userComment}})
         //send res

@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux';
 
 function AuthorProfile() {
   let {currentUser}=useSelector(state=>state.userLogin)
+ // console.log(currentUser)
  
   return (
     <div className="author-profile p-3 ">
